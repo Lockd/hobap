@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private Rigidbody2D rb;
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner) return;
+
         if (canMove)
         {
             float horizontalDirection = Input.GetAxisRaw("Horizontal");
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour
             // if (horizontalDirection != 0)
             //     transform.localScale = new Vector3(horizontalDirection / Mathf.Abs(horizontalDirection), transform.localScale.y, transform.localScale.z);
 
-            rb.velocity = new Vector2(horizontalDirection, verticalDirection).normalized * speed;
+            onMoveServerRpc(horizontalDirection, verticalDirection);
         }
 
         mousePosition = Input.mousePosition;
@@ -37,7 +40,8 @@ public class PlayerController : MonoBehaviour
         mousePosition.x = mousePosition.x - objectPosition.x;
         mousePosition.y = mousePosition.y - objectPosition.y;
         rotationAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, rotationAngle));
+        // TODO if transform is different
+        onRotateServerRpc(rotationAngle);
     }
 
     public bool CanMove
@@ -46,5 +50,18 @@ public class PlayerController : MonoBehaviour
         {
             canMove = value;
         }
+    }
+
+    [ServerRpc]
+    void onMoveServerRpc(float horizontalDirection, float verticalDirection)
+    {
+        // There's a delay in this thing?
+        rb.velocity = new Vector2(horizontalDirection, verticalDirection).normalized * speed;
+    }
+
+    [ServerRpc]
+    void onRotateServerRpc(float rotationAngle)
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, rotationAngle));
     }
 }

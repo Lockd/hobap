@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class BulletBehaviour : MonoBehaviour
+public class BulletBehaviour : NetworkBehaviour
 {
     [SerializeField] private float maxTravelDistance = 20f;
     Vector3 initialPosition;
@@ -15,7 +16,13 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (Vector3.Distance(initialPosition, transform.position) > maxTravelDistance)
         {
-            Destroy(gameObject);
+            destroyBulletServerRpc();
         }
+    }
+
+    [ServerRpc]
+    void destroyBulletServerRpc()
+    {
+        GetComponent<NetworkObject>().Despawn(true);
     }
 }

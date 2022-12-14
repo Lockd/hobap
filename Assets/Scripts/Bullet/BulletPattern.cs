@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 [CreateAssetMenu(fileName = "BulletPattern", menuName = "ScriptableObjects/BulletPattern", order = 1)]
 public class BulletPattern : ScriptableObject
@@ -43,6 +44,8 @@ public class BulletPattern : ScriptableObject
                 firePoint.transform.position,
                 Quaternion.Euler(bulletRotation)
             );
+            bullet.GetComponent<NetworkObject>().Spawn(true);
+
             Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
 
             Vector2 shootingVector = new Vector2(
