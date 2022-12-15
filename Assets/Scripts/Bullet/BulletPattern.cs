@@ -46,6 +46,9 @@ public class BulletPattern : ScriptableObject
             );
             bullet.GetComponent<NetworkObject>().Spawn(true);
 
+            BulletBehaviour bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
+            bulletBehaviour.parent = firePoint.transform.parent.gameObject;
+
             Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
 
             Vector2 shootingVector = new Vector2(
@@ -54,6 +57,7 @@ public class BulletPattern : ScriptableObject
             );
 
             bulletRB.velocity = shootingVector * projectileSpeed;
+            bulletBehaviour.projectileSpeed = projectileSpeed;
         }
     }
 }

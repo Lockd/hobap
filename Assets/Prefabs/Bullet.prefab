@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7434335357205037008}
   - component: {fileID: 5086040976316127170}
   - component: {fileID: 2019486668638178109}
+  - component: {fileID: 6516955877096120584}
   - component: {fileID: 8836274006095479922}
   - component: {fileID: -4429548887954124538}
   m_Layer: 0
@@ -100,6 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c0a4bc77177d045acf717fd88a3d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  projectileSpeed: 0
   maxTravelDistance: 20
 --- !u!50 &2019486668638178109
 Rigidbody2D:
@@ -122,6 +125,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &6516955877096120584
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6238792269117460173}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &8836274006095479922
 MonoBehaviour:
   m_ObjectHideFlags: 0
