@@ -44,7 +44,7 @@ public class PlayerAbilities : NetworkBehaviour
         }
 
         if (
-            Input.GetKeyDown(KeyCode.LeftShift) &&
+            Input.GetKeyDown(KeyCode.Q) &&
             Time.time > canReflectAfter &&
             !isReflecting
         )

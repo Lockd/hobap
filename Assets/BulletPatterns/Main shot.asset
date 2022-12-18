@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
   m_Name: Main shot
   m_EditorClassIdentifier: 
-  canShootAfter: 10.237895
-  triggerButton: 113
+  canShootAfter: 12.007144
+  triggerButton: 323
   amountOfBullets: 1
   delayBetweenShots: 0
   shootingAngle: 0
