@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Cinemachine;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -10,6 +9,15 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Rigidbody2D rb;
     bool moving;
     bool isFacingRight = true;
+
+    void Start()
+    {
+        if (IsOwner)
+        {
+            CinemachineVirtualCamera vcam = Object.FindObjectOfType<CinemachineVirtualCamera>();
+            vcam.Follow = transform;
+        }
+    }
 
     void FixedUpdate()
     {
