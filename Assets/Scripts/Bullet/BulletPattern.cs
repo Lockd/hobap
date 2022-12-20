@@ -37,6 +37,9 @@ public class BulletPattern : ScriptableObject
                 rotationDegree += baseBulletAngleDeviation + bulletIndex * deltaAngle;
             }
 
+            // This is required since player's model is facing another direction
+            if (player.localScale.x < 0) rotationDegree += 180;
+
             Vector3 bulletRotation = new Vector3(0f, 0f, rotationDegree);
 
             GameObject bullet = Instantiate(

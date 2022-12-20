@@ -19,5 +19,5 @@ MonoBehaviour:
   shootingAngle: 30
   cooldown: 2.5
   projectileSpeed: 20
-  projectile: {fileID: 6238792269117460173, guid: 5835b113a09a40040bf028ab73445dd5, type: 3}
+  projectile: {fileID: 1767798774397034675, guid: 5835b113a09a40040bf028ab73445dd5, type: 3}
   shouldDeviate: 1
