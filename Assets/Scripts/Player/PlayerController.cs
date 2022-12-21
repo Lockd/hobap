@@ -8,7 +8,6 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float rotationSpeed = 60f;
     [SerializeField] private Rigidbody2D rb;
     bool isAbleToRotate = true;
-    bool moving;
     bool isFacingRight = true;
 
     void Start()
@@ -32,9 +31,6 @@ public class PlayerController : NetworkBehaviour
         float horizontalDirection = Input.GetAxisRaw("Horizontal");
         float verticalDirection = Input.GetAxisRaw("Vertical");
 
-        if (new Vector2(horizontalDirection, verticalDirection).Equals(new Vector2(0, 0))) moving = false;
-        else moving = true;
-
         bool shouldRotate = false;
         if (
             (horizontalDirection > 0 && !isFacingRight || horizontalDirection < 0 && isFacingRight) &&
@@ -48,7 +44,6 @@ public class PlayerController : NetworkBehaviour
         onMoveServerRpc(horizontalDirection, verticalDirection, shouldRotate);
     }
 
-    // TODO this shit does not work
     [ServerRpc]
     void onMoveServerRpc(float horizontalDirection, float verticalDirection, bool shouldRotate)
     {

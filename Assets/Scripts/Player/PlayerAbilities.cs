@@ -6,7 +6,7 @@ using Unity.Netcode;
 public class PlayerAbilities : NetworkBehaviour
 {
     [SerializeField] private GameObject firePoint;
-    [SerializeField] private List<BulletPattern> spells;
+    [SerializeField] private List<BulletPattern> spells = new List<BulletPattern>();
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private float reflectionDuration = 1.2f;
     [SerializeField] private float reflectionCooldown = 5f;
@@ -22,11 +22,6 @@ public class PlayerAbilities : NetworkBehaviour
         reflectorRenderer = shieldPrefab.GetComponent<SpriteRenderer>();
         reflectorCollider = shieldPrefab.GetComponent<Collider2D>();
         playerController = GetComponent<PlayerController>();
-
-        foreach (BulletPattern pattern in spells)
-        {
-            pattern.Start();
-        }
     }
 
     void Update()
@@ -67,6 +62,15 @@ public class PlayerAbilities : NetworkBehaviour
             isReflecting = false;
             playerController.onChangeRotationAbility(true);
             changeShieldActivityServerRpc(false);
+        }
+    }
+
+    public void onAddSpells(List<BulletPattern> spellsToAdd)
+    {
+        spells = spellsToAdd;
+        foreach (BulletPattern pattern in spells)
+        {
+            pattern.Start();
         }
     }
 
