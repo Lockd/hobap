@@ -138,7 +138,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27ac49e9f34327c4285b6dfb675d38b5, type: 2}
   - {fileID: 11400000, guid: 8548bdecc5d8d0e40b00b2cc132d4d53, type: 2}
   shieldPrefab: {fileID: 1710970850241799032}
-  reflectionDuration: 4
+  reflectionDuration: 1.5
   reflectionCooldown: 5
   isReflecting: 0
 --- !u!50 &340542015106795693

@@ -7,7 +7,7 @@ public class BulletBehaviour : NetworkBehaviour
 {
     public GameObject parent;
     public float projectileSpeed;
-    [SerializeField] private float maxTravelDistance = 20f;
+    public float maxTravelDistance = 20f;
     public int damage = 1;
     Vector3 initialPosition;
     Rigidbody2D rb;

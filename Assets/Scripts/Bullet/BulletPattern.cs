@@ -15,6 +15,7 @@ public class BulletPattern : ScriptableObject
     [SerializeField] private float projectileSpeed = 20f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private bool shouldDeviate = false;
+    [SerializeField] private float bulletMaxTravelDistance = 40f;
     float baseBulletAngleDeviation;
     float deltaAngle;
 
@@ -61,6 +62,7 @@ public class BulletPattern : ScriptableObject
 
             bulletRB.velocity = shootingVector * projectileSpeed;
             bulletBehaviour.projectileSpeed = projectileSpeed;
+            bulletBehaviour.maxTravelDistance = bulletMaxTravelDistance;
         }
     }
 }

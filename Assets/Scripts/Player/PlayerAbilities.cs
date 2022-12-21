@@ -15,11 +15,13 @@ public class PlayerAbilities : NetworkBehaviour
     float canReflectAfter = 0f;
     Collider2D reflectorCollider;
     SpriteRenderer reflectorRenderer;
+    PlayerController playerController;
 
     void Start()
     {
         reflectorRenderer = shieldPrefab.GetComponent<SpriteRenderer>();
         reflectorCollider = shieldPrefab.GetComponent<Collider2D>();
+        playerController = GetComponent<PlayerController>();
 
         foreach (BulletPattern pattern in spells)
         {
@@ -52,6 +54,7 @@ public class PlayerAbilities : NetworkBehaviour
             canReflectAfter = Time.time + reflectionCooldown;
             shouldStopReflectingAfter = Time.time + reflectionDuration;
             isReflecting = true;
+            playerController.onChangeRotationAbility(false);
 
             changeShieldActivityServerRpc(true);
         }
@@ -62,6 +65,7 @@ public class PlayerAbilities : NetworkBehaviour
         )
         {
             isReflecting = false;
+            playerController.onChangeRotationAbility(true);
             changeShieldActivityServerRpc(false);
         }
     }
