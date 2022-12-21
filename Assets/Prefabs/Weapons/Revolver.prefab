@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4750237016190812536
+--- !u!1 &7818268701238825745
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3449192297927882389}
-  - component: {fileID: 7844645668987280556}
+  - component: {fileID: 2217437154744841058}
+  - component: {fileID: 6535353471507422491}
   m_Layer: 0
-  m_Name: hat
+  m_Name: Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3449192297927882389
+--- !u!4 &2217437154744841058
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4750237016190812536}
-  m_LocalRotation: {x: -0, y: -0, z: 0.19947316, w: 0.9799033}
-  m_LocalPosition: {x: -0.14, y: 0.373, z: 0}
-  m_LocalScale: {x: 0.28507718, y: 0.28507718, z: 0.64142364}
+  m_GameObject: {fileID: 7818268701238825745}
+  m_LocalRotation: {x: -0, y: -0, z: 0.03769573, w: 0.9992893}
+  m_LocalPosition: {x: 0.513, y: -0.118, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 23.012}
---- !u!212 &7844645668987280556
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4.321}
+--- !u!212 &6535353471507422491
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4750237016190812536}
+  m_GameObject: {fileID: 7818268701238825745}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,13 +72,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
-  m_Sprite: {fileID: 21300000, guid: ea181179b728c0244b7f17ac53e1383d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 21300000, guid: ac2f6df8538e6524b930a9bdbaec325c, type: 3}
+  m_Color: {r: 1, g: 0.63529414, b: 0.63529414, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 1.19, y: 0.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

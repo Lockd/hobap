@@ -78,7 +78,7 @@ public class PlayerAbilities : NetworkBehaviour
     void shotBulletServerRpc(int patternIdx)
     {
         BulletPattern pattern = spells[patternIdx];
-        pattern.onShoot(firePoint, transform);
+        StartCoroutine(pattern.onShoot(firePoint, transform));
     }
 
     // TODO Do I really need both of em?

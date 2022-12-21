@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
+  m_Name: Shotgun-Secondary-Shot
+  m_EditorClassIdentifier: 
+  canShootAfter: 3.9368024
+  amountOfShotWaves: 2
+  delayBetweenShots: 0.1
+  triggerButton: 114
+  amountOfBullets: 5
+  deviationType: 2
+  shootingAngle: 60
+  cooldown: 2
+  projectileSpeed: 30
+  projectile: {fileID: 1767798774397034675, guid: 5835b113a09a40040bf028ab73445dd5, type: 3}
+  bulletMaxTravelDistance: 60
