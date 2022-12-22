@@ -13,15 +13,11 @@ public class PlayerAbilities : NetworkBehaviour
     public bool isReflecting = false;
     float shouldStopReflectingAfter = 0f;
     float canReflectAfter = 0f;
-    Collider2D reflectorCollider;
-    SpriteRenderer reflectorRenderer;
     PlayerController playerController;
     LineRenderer laserLine;
 
     void Start()
     {
-        reflectorRenderer = shieldPrefab.GetComponent<SpriteRenderer>();
-        reflectorCollider = shieldPrefab.GetComponent<Collider2D>();
         playerController = GetComponent<PlayerController>();
         laserLine = GetComponent<LineRenderer>();
     }

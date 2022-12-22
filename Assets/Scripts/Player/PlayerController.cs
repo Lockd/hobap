@@ -59,7 +59,7 @@ public class PlayerController : NetworkBehaviour
 
             if (horizontalDirection != 0 || verticalDirection != 0)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotationQuaternion, Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotationQuaternion, Time.fixedDeltaTime * rotationSpeed);
             }
 
             if (shouldRotate)

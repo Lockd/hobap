@@ -25,4 +25,10 @@ public class networkManagerUI : MonoBehaviour
             NetworkManager.Singleton.StartClient();
         });
     }
+
+    // Remove this to enable ability to connect to server
+    private void Start()
+    {
+        NetworkManager.Singleton.StartHost();
+    }
 }
