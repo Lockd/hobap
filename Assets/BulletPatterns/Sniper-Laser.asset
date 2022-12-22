@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
+  m_Name: Sniper-Laser
+  m_EditorClassIdentifier: 
+  canShootAfter: 43.178024
+  amountOfShotWaves: 1
+  delayBetweenShots: 0.4
+  triggerButton: 101
+  projectileType: 1
+  amountOfBullets: 1
+  deviationType: 0
+  shootingAngle: 0
+  cooldown: 2
+  projectileSpeed: 20
+  projectile: {fileID: 0}
+  bulletMaxTravelDistance: 100
+  shouldLockRotation: 1

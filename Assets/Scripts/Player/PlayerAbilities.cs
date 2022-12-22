@@ -16,12 +16,14 @@ public class PlayerAbilities : NetworkBehaviour
     Collider2D reflectorCollider;
     SpriteRenderer reflectorRenderer;
     PlayerController playerController;
+    LineRenderer laserLine;
 
     void Start()
     {
         reflectorRenderer = shieldPrefab.GetComponent<SpriteRenderer>();
         reflectorCollider = shieldPrefab.GetComponent<Collider2D>();
         playerController = GetComponent<PlayerController>();
+        laserLine = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -70,7 +72,7 @@ public class PlayerAbilities : NetworkBehaviour
         spells = spellsToAdd;
         foreach (BulletPattern pattern in spells)
         {
-            pattern.Start();
+            pattern.onAddSpell(laserLine);
         }
     }
 
