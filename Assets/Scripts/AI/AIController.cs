@@ -16,6 +16,13 @@ public class AIController : NetworkBehaviour
     bool isFacingRight = true;
     Vector3 moveVector;
     AIAbilities aiAbilities;
+    // bool isInAttackRange = false;
+    // bool isInPlayerRange = false;
+    bool shouldDodge = false;
+    List<Rigidbody2D> rbToAvoid = new List<Rigidbody2D>();
+
+    enum botControllerStates { Chasing, Attacking, Dodging };
+    [SerializeField] private botControllerStates state = botControllerStates.Chasing;
 
     void Start()
     {
@@ -50,13 +57,73 @@ public class AIController : NetworkBehaviour
         if (newTarget != null) target = newTarget.transform;
     }
 
+    bool checkIfShouldContinueDodging()
+    {
+        List<Rigidbody2D> filteredRbToAvoid = new List<Rigidbody2D>();
+        foreach (Rigidbody2D _rb in rbToAvoid)
+        {
+            if (_rb == null) continue;
+
+            RaycastHit2D[] hits = Physics2D.RaycastAll(_rb.transform.position, _rb.velocity);
+            bool shouldRemoveRb = true;
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.transform == transform) shouldRemoveRb = false;
+            }
+
+            if (!shouldRemoveRb) filteredRbToAvoid.Add(_rb);
+        }
+
+        rbToAvoid = filteredRbToAvoid;
+
+        return rbToAvoid.Count != 0;
+    }
+
+    void checkDistanceToTarget()
+    {
+        if (Vector3.Distance(transform.position, target.position) > distanceToStopMovingForward)
+        {
+            state = botControllerStates.Chasing;
+        }
+        else
+        {
+            state = botControllerStates.Attacking;
+        }
+    }
+
     void FixedUpdate()
     {
         if (Time.time > checkForTargetAfter || target == null) onSelectTarget();
 
+        // TODO add logic for AI to walk around? 
         if (target == null) return;
 
-        moveVector = (target.position - transform.position).normalized;
+        switch (state)
+        {
+            case botControllerStates.Attacking:
+                // aiAbilities.useSecondarySpell();
+                checkDistanceToTarget();
+                // TODO add logic to attack
+                Debug.Log("should start attacking");
+                break;
+            case botControllerStates.Chasing:
+                moveVector = (target.position - transform.position).normalized;
+                checkDistanceToTarget();
+                break;
+            case botControllerStates.Dodging:
+                bool shouldContinueDodge = checkIfShouldContinueDodging();
+                if (!shouldContinueDodge)
+                {
+                    // TODO set this vaule based on distance to the target
+                    state = botControllerStates.Chasing;
+                    break;
+                }
+
+                moveVector = Vector2.Perpendicular(rbToAvoid[0].velocity).normalized;
+                break;
+            default:
+                break;
+        }
 
         float horizontalDirection = moveVector.x;
         float verticalDirection = moveVector.y;
@@ -99,7 +166,7 @@ public class AIController : NetworkBehaviour
             }
         }
 
-        if (Vector3.Distance(transform.position, target.position) > distanceToStopMovingForward)
+        if (state == botControllerStates.Chasing || state == botControllerStates.Dodging)
         {
             Vector2 direction = new Vector2(horizontalDirection, verticalDirection).normalized;
             rb.velocity = direction * speed;
@@ -107,6 +174,25 @@ public class AIController : NetworkBehaviour
         else
         {
             rb.velocity = Vector2.zero;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Projectile")
+        {
+            Rigidbody2D bulletRb = collider.gameObject.GetComponent<Rigidbody2D>();
+            Vector2 bulletDirection = bulletRb.velocity;
+            RaycastHit2D[] hits = Physics2D.RaycastAll(collider.transform.position, bulletDirection);
+
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.transform == transform)
+                {
+                    state = botControllerStates.Dodging;
+                    rbToAvoid.Add(bulletRb);
+                }
+            }
         }
     }
 }

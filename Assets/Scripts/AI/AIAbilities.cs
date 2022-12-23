@@ -39,6 +39,18 @@ public class AIAbilities : NetworkBehaviour
         changeShieldActivityServerRpc(false);
     }
 
+    // TODO add cooldowns
+    // TODO rework cooldowns to work from bullet pattern script
+    public void usePrimarySpell()
+    {
+        shotBulletServerRpc(0);
+    }
+
+    public void useSecondarySpell()
+    {
+        shotBulletServerRpc(1);
+    }
+
     [ServerRpc]
     void shotBulletServerRpc(int patternIdx)
     {

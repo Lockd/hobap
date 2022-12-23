@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 6217277555187684822}
   - component: {fileID: 5049349358500281154}
   - component: {fileID: -6134231789792493586}
+  - component: {fileID: 1768391377717753372}
   m_Layer: 0
   m_Name: AI Sniper
   m_TagString: Player
@@ -355,6 +356,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &1768391377717753372
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409411629120008237}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
 --- !u!1 &3409411630109289666
 GameObject:
   m_ObjectHideFlags: 0
