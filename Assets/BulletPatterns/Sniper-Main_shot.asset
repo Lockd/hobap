@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
   m_Name: Sniper-Main_shot
   m_EditorClassIdentifier: 
-  canShootAfter: 34.448082
+  canShootAfter: 0
   amountOfShotWaves: 1
   delayBetweenShots: 0
   triggerButton: 101
+  projectileType: 0
   amountOfBullets: 1
+  deviationType: 0
   shootingAngle: 0
-  cooldown: 0.3
-  projectileSpeed: 40
-  projectile: {fileID: 1767798774397034675, guid: 5835b113a09a40040bf028ab73445dd5, type: 3}
-  shouldDeviate: 0
+  cooldown: 0.5
+  projectileSpeed: 45
+  projectile: {fileID: 1767798774397034675, guid: dbf42b5c8107918408bab27625cf50f2, type: 3}
   bulletMaxTravelDistance: 60
-  shouldRandomizeDeviationAngle: 0
+  shouldLockRotation: 0

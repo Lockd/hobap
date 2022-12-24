@@ -21,6 +21,7 @@ public class PlayerController : NetworkBehaviour
 
     public void onChangeRotationAbility(bool shouldBeAbleToRotate)
     {
+        Debug.Log("setting ability to rotate to " + shouldBeAbleToRotate);
         isAbleToRotate = shouldBeAbleToRotate;
     }
 

@@ -65,18 +65,27 @@ public class PlayerAbilities : NetworkBehaviour
 
     public void onAddSpells(List<BulletPattern> spellsToAdd)
     {
-        spells = spellsToAdd;
-        foreach (BulletPattern pattern in spells)
+        List<BulletPattern> InstantiatedSpells = new List<BulletPattern>();
+        spellsToAdd.ForEach((BulletPattern spell) =>
         {
-            pattern.onAddSpell(laserLine);
-        }
+            BulletPattern spellToAdd = Instantiate(spell);
+            InstantiatedSpells.Add(spellToAdd);
+            spellToAdd.onAddSpell(laserLine);
+        });
+        spells = InstantiatedSpells;
     }
 
     [ServerRpc]
     void shotBulletServerRpc(int patternIdx)
     {
         BulletPattern pattern = spells[patternIdx];
-        StartCoroutine(pattern.onShoot(firePoint, transform));
+        StartCoroutine(
+            pattern.onShoot(
+                firePoint,
+                transform,
+                playerController.onChangeRotationAbility
+            )
+        );
     }
 
     // TODO Do I really need both of em?

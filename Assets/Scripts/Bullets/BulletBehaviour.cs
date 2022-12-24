@@ -7,7 +7,7 @@ public class BulletBehaviour : NetworkBehaviour
 {
     public GameObject parent;
     public float projectileSpeed;
-    public float maxTravelDistance = 20f;
+    public float maxTravelDistance;
     public int damage = 1;
     Vector3 initialPosition;
     Rigidbody2D rb;
@@ -43,6 +43,7 @@ public class BulletBehaviour : NetworkBehaviour
 
                 Vector2 newDir = Vector2.Reflect(curDir, collider.transform.right);
                 rb.velocity = newDir.normalized * projectileSpeed;
+                // TODO fix that so that long bullets are rotated properly 
             }
         }
     }

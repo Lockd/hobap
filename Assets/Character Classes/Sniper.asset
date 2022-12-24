@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: 
   spells:
-  - {fileID: 11400000, guid: c1137de803688734f8fbfcd30f358f62, type: 2}
+  - {fileID: 11400000, guid: 27ac49e9f34327c4285b6dfb675d38b5, type: 2}
   - {fileID: 11400000, guid: 8548bdecc5d8d0e40b00b2cc132d4d53, type: 2}
   weapon: {fileID: 7261812604784766853, guid: ee05c849c2e14fc4cb645986a188428c, type: 3}
   hat: {fileID: 4750237016190812536, guid: a11607b5409fa57428fddaac43730545, type: 3}

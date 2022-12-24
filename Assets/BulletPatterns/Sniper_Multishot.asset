@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
   m_Name: Sniper_Multishot
   m_EditorClassIdentifier: 
-  canShootAfter: 24.21228
+  canShootAfter: 0
   amountOfShotWaves: 1
   delayBetweenShots: 0
   triggerButton: 114
+  projectileType: 0
   amountOfBullets: 3
   deviationType: 2
   shootingAngle: 15
-  cooldown: 2.5
-  projectileSpeed: 25
-  projectile: {fileID: 1767798774397034675, guid: 5835b113a09a40040bf028ab73445dd5, type: 3}
-  bulletMaxTravelDistance: 40
+  cooldown: 3.5
+  projectileSpeed: 45
+  projectile: {fileID: 1767798774397034675, guid: dbf42b5c8107918408bab27625cf50f2, type: 3}
+  bulletMaxTravelDistance: 60
+  shouldLockRotation: 0

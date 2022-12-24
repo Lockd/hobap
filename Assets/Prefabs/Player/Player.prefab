@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   classes:
+  - {fileID: 11400000, guid: db7fadd0d42bff341a53337f997e4a39, type: 2}
   - {fileID: 11400000, guid: 04380d019245a2f499cccd31a1b9093a, type: 2}
   - {fileID: 11400000, guid: 730e6c917e2bada42a3956f7d720c37f, type: 2}
-  - {fileID: 11400000, guid: db7fadd0d42bff341a53337f997e4a39, type: 2}
 --- !u!50 &340542015106795693
 Rigidbody2D:
   serializedVersion: 4
@@ -393,7 +393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340542016272077951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1.66, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

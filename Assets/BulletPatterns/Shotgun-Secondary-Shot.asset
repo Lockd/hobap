@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
   m_Name: Shotgun-Secondary-Shot
   m_EditorClassIdentifier: 
-  canShootAfter: 3.9368024
+  canShootAfter: 0
   amountOfShotWaves: 2
   delayBetweenShots: 0.1
   triggerButton: 114
+  projectileType: 0
   amountOfBullets: 5
   deviationType: 2
   shootingAngle: 60
@@ -23,3 +24,4 @@ MonoBehaviour:
   projectileSpeed: 30
   projectile: {fileID: 1767798774397034675, guid: 5835b113a09a40040bf028ab73445dd5, type: 3}
   bulletMaxTravelDistance: 60
+  shouldLockRotation: 0

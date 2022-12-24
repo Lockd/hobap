@@ -8,7 +8,8 @@ public class AIController : NetworkBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float rotationSpeed = 60f;
     [SerializeField] float selectNewTargetCooldown = 5f;
-    [SerializeField] float distanceToStopMovingForward = 8f;
+    [SerializeField] float shootingDistance = 8f;
+    [SerializeField] float distanceToMoveBack = 6f;
     Rigidbody2D rb;
     float checkForTargetAfter = 0f;
     Transform target = null;
@@ -16,12 +17,9 @@ public class AIController : NetworkBehaviour
     bool isFacingRight = true;
     Vector3 moveVector;
     AIAbilities aiAbilities;
-    // bool isInAttackRange = false;
-    // bool isInPlayerRange = false;
-    bool shouldDodge = false;
-    List<Rigidbody2D> rbToAvoid = new List<Rigidbody2D>();
+    public List<Rigidbody2D> rbToAvoid = new List<Rigidbody2D>();
 
-    enum botControllerStates { Chasing, Attacking, Dodging };
+    enum botControllerStates { Chasing, Attacking, Dodging, Avoid };
     [SerializeField] private botControllerStates state = botControllerStates.Chasing;
 
     void Start()
@@ -81,14 +79,19 @@ public class AIController : NetworkBehaviour
 
     void checkDistanceToTarget()
     {
-        if (Vector3.Distance(transform.position, target.position) > distanceToStopMovingForward)
-        {
-            state = botControllerStates.Chasing;
-        }
-        else
-        {
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+        if (distanceToTarget < shootingDistance && distanceToTarget > distanceToMoveBack)
             state = botControllerStates.Attacking;
-        }
+
+        if (distanceToTarget > shootingDistance) state = botControllerStates.Chasing;
+
+        if (distanceToTarget <= distanceToMoveBack) state = botControllerStates.Avoid;
+    }
+
+    bool checkIfShouldReflect()
+    {
+        return rbToAvoid.Count >= 2;
     }
 
     void FixedUpdate()
@@ -100,11 +103,23 @@ public class AIController : NetworkBehaviour
 
         switch (state)
         {
-            case botControllerStates.Attacking:
-                // aiAbilities.useSecondarySpell();
+            case botControllerStates.Avoid:
+                moveVector = (transform.position - target.position).normalized;
                 checkDistanceToTarget();
-                // TODO add logic to attack
-                Debug.Log("should start attacking");
+                break;
+            case botControllerStates.Attacking:
+                checkDistanceToTarget();
+
+                for (int i = 0; i < aiAbilities.spells.Count; i++)
+                {
+                    BulletPattern spell = aiAbilities.spells[i];
+                    if (Time.time > spell.canShootAfter)
+                    {
+                        aiAbilities.shotBulletServerRpc(i);
+                        break;
+                    }
+                }
+                moveVector = (target.position - transform.position).normalized;
                 break;
             case botControllerStates.Chasing:
                 moveVector = (target.position - transform.position).normalized;
@@ -114,7 +129,6 @@ public class AIController : NetworkBehaviour
                 bool shouldContinueDodge = checkIfShouldContinueDodging();
                 if (!shouldContinueDodge)
                 {
-                    // TODO set this vaule based on distance to the target
                     state = botControllerStates.Chasing;
                     break;
                 }
@@ -166,7 +180,11 @@ public class AIController : NetworkBehaviour
             }
         }
 
-        if (state == botControllerStates.Chasing || state == botControllerStates.Dodging)
+        if (
+            state == botControllerStates.Chasing ||
+            state == botControllerStates.Dodging ||
+            state == botControllerStates.Avoid
+        )
         {
             Vector2 direction = new Vector2(horizontalDirection, verticalDirection).normalized;
             rb.velocity = direction * speed;
@@ -181,6 +199,11 @@ public class AIController : NetworkBehaviour
     {
         if (collider.tag == "Projectile")
         {
+            BulletBehaviour bulletBehaviour = collider.GetComponent<BulletBehaviour>();
+            // AI should not react to it's own bullets
+            if (gameObject == bulletBehaviour.parent)
+                return;
+
             Rigidbody2D bulletRb = collider.gameObject.GetComponent<Rigidbody2D>();
             Vector2 bulletDirection = bulletRb.velocity;
             RaycastHit2D[] hits = Physics2D.RaycastAll(collider.transform.position, bulletDirection);
@@ -192,6 +215,10 @@ public class AIController : NetworkBehaviour
                     state = botControllerStates.Dodging;
                     rbToAvoid.Add(bulletRb);
                 }
+            }
+            if (checkIfShouldReflect())
+            {
+                StartCoroutine(aiAbilities.onReflect());
             }
         }
     }

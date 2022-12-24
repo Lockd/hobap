@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
   m_Name: Shotgun-Main_shot
   m_EditorClassIdentifier: 
-  canShootAfter: 1.9934738
+  canShootAfter: 0
   amountOfShotWaves: 1
   delayBetweenShots: 0
   triggerButton: 101
+  projectileType: 0
   amountOfBullets: 3
   deviationType: 2
   shootingAngle: 30
@@ -23,3 +24,4 @@ MonoBehaviour:
   projectileSpeed: 30
   projectile: {fileID: 1767798774397034675, guid: 5835b113a09a40040bf028ab73445dd5, type: 3}
   bulletMaxTravelDistance: 60
+  shouldLockRotation: 0

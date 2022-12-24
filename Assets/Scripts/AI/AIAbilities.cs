@@ -6,7 +6,7 @@ using Unity.Netcode;
 public class AIAbilities : NetworkBehaviour
 {
     [SerializeField] private GameObject firePoint;
-    [SerializeField] private List<BulletPattern> spells = new List<BulletPattern>();
+    public List<BulletPattern> spells = new List<BulletPattern>();
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private float reflectionDuration = 1.2f;
     [SerializeField] private float reflectionCooldown = 5f;
@@ -19,6 +19,16 @@ public class AIAbilities : NetworkBehaviour
     {
         aiController = GetComponent<AIController>();
         laserLine = GetComponent<LineRenderer>();
+
+        List<BulletPattern> InstantiatedSpells = new List<BulletPattern>();
+        spells.ForEach((BulletPattern spell) =>
+        {
+            BulletPattern spellToAdd = Instantiate(spell);
+            InstantiatedSpells.Add(spellToAdd);
+            spellToAdd.onAddSpell(laserLine);
+        });
+        spells = InstantiatedSpells;
+
         canReflectAfter = 0f;
     }
 
@@ -39,23 +49,17 @@ public class AIAbilities : NetworkBehaviour
         changeShieldActivityServerRpc(false);
     }
 
-    // TODO add cooldowns
-    // TODO rework cooldowns to work from bullet pattern script
-    public void usePrimarySpell()
-    {
-        shotBulletServerRpc(0);
-    }
-
-    public void useSecondarySpell()
-    {
-        shotBulletServerRpc(1);
-    }
-
     [ServerRpc]
-    void shotBulletServerRpc(int patternIdx)
+    public void shotBulletServerRpc(int patternIdx)
     {
         BulletPattern pattern = spells[patternIdx];
-        StartCoroutine(pattern.onShoot(firePoint, transform));
+        StartCoroutine(
+            pattern.onShoot(
+                firePoint,
+                transform,
+                aiController.onChangeRotationAbility
+            )
+        );
     }
 
     // TODO Do I really need both of em?

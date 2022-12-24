@@ -28,17 +28,15 @@ public class BulletPattern : ScriptableObject
 
     public void onAddSpell(LineRenderer _lineRenderer)
     {
-        canShootAfter = 0f;
         deltaAngle = shootingAngle / (amountOfBullets - 1);
         baseBulletAngleDeviation = -shootingAngle / 2;
-        waveIdx = 0;
         lineRenderer = _lineRenderer;
     }
 
-    public IEnumerator onShoot(GameObject firePoint, Transform player)
+    public IEnumerator onShoot(GameObject firePoint, Transform player, System.Action<bool> changeRotationAbility)
     {
-        PlayerController controller = player.GetComponent<PlayerController>();
-        if (controller != null && shouldLockRotation) controller.onChangeRotationAbility(false);
+        if (shouldLockRotation) changeRotationAbility(false);
+        // TODO remove this logic if laser is not needed anymore
         switch (projectileType)
         {
             case projectileTypes.Laser:
@@ -110,7 +108,7 @@ public class BulletPattern : ScriptableObject
                 }
                 break;
         }
-        if (controller != null && shouldLockRotation) controller.onChangeRotationAbility(true);
+        if (shouldLockRotation) changeRotationAbility(true);
     }
 
     void onLaserShot(GameObject firePoint, Transform player, bool shouldDealDamage = false)
@@ -132,8 +130,6 @@ public class BulletPattern : ScriptableObject
         lineRenderer.SetPosition(0, firePoint.transform.localPosition);
 
         Vector3 laserDirection = Vector3.right;
-        // This is required since player's model is facing another direction
-        // if (player.localScale.x < 0) laserDirection = Vector3.left;
 
         lineRenderer.SetPosition(1, laserDirection * bulletMaxTravelDistance);
 
@@ -142,10 +138,5 @@ public class BulletPattern : ScriptableObject
             RaycastHit2D[] targets = Physics2D.RaycastAll(firePoint.transform.localPosition, firePoint.transform.right);
             // TODO deal damage to targets
         }
-    }
-
-    private IEnumerator WaitAndPrint(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
     }
 }

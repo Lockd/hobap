@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab989f08f532b44eaecebaf5ef5da66, type: 3}
   m_Name: Sniper-Laser
   m_EditorClassIdentifier: 
-  canShootAfter: 43.178024
+  canShootAfter: 0
   amountOfShotWaves: 1
   delayBetweenShots: 0.4
   triggerButton: 101
