@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 5;
     [SerializeField] private int currentHealth;
+    [SerializeField] private float zoneDamageCooldown = 1.5f;
     [SerializeField] private Transform healthUI;
     [SerializeField] private GameObject healthBar;
     [SerializeField] private Color32 activeUIColor;
@@ -14,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private NetworkObject networkObject;
     [SerializeField] private bool isInsideAllowedArea = false;
     int lastColoredHealthBarIdx;
+    float takeDamageFromZoneAfter = 0f;
 
     void Start()
     {
@@ -30,6 +32,15 @@ public class PlayerHealth : MonoBehaviour
             Instantiate(healthBar, healthUI, false);
         }
         lastColoredHealthBarIdx = maxHealth - 1;
+    }
+
+    void Update()
+    {
+        if (!isInsideAllowedArea && Time.time > takeDamageFromZoneAfter)
+        {
+            onChangeCurrentHealth(1);
+            takeDamageFromZoneAfter = Time.time + zoneDamageCooldown;
+        }
     }
 
     void repaintHealthbars(int amount, bool isHealing)
@@ -84,7 +95,6 @@ public class PlayerHealth : MonoBehaviour
                 bulletBehaviour.destroyBulletServerRpc();
             }
         }
-        Debug.Log("Entered collider " + collider.name);
         if (collider.tag == "Allowed Area")
         {
             isInsideAllowedArea = true;
@@ -96,6 +106,7 @@ public class PlayerHealth : MonoBehaviour
         if (collider.tag == "Allowed Area")
         {
             isInsideAllowedArea = false;
+            takeDamageFromZoneAfter = Time.time + zoneDamageCooldown;
         }
     }
 }
