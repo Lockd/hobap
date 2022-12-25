@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Reflector
   - Projectile
+  - Allowed Area
   layers:
   - Default
   - TransparentFX

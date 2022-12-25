@@ -10,7 +10,7 @@ public class AIController : NetworkBehaviour
     [SerializeField] float selectNewTargetCooldown = 5f;
     [SerializeField] float shootingDistance = 8f;
     [SerializeField] float distanceToMoveBack = 6f;
-    Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     float checkForTargetAfter = 0f;
     Transform target = null;
     bool isAbleToRotate = true;
@@ -26,7 +26,6 @@ public class AIController : NetworkBehaviour
     {
         onSelectTarget();
         checkForTargetAfter = 0f;
-        rb = GetComponent<Rigidbody2D>();
         aiAbilities = GetComponent<AIAbilities>();
     }
 

@@ -361,7 +361,7 @@ MonoBehaviour:
   parent: {fileID: 0}
   projectileSpeed: 0
   maxTravelDistance: 20
-  damage: 0
+  damage: 1
 --- !u!50 &1767798774397034639
 Rigidbody2D:
   serializedVersion: 4
