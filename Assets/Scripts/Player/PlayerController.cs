@@ -8,7 +8,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float rotationSpeed = 60f;
     [SerializeField] private Rigidbody2D rb;
     bool isAbleToRotate = true;
-    bool isFacingRight = true;
+    public bool isFacingRight = true;
 
     void Start()
     {
@@ -42,11 +42,11 @@ public class PlayerController : NetworkBehaviour
             isFacingRight = horizontalDirection > 0;
         }
 
-        onMoveServerRpc(horizontalDirection, verticalDirection, shouldRotate);
+        onMoveServerRpc(horizontalDirection, verticalDirection, shouldRotate, isFacingRight);
     }
 
     [ServerRpc]
-    void onMoveServerRpc(float horizontalDirection, float verticalDirection, bool shouldRotate)
+    void onMoveServerRpc(float horizontalDirection, float verticalDirection, bool shouldRotate, bool isFacingRight)
     {
         Vector2 direction = new Vector2(horizontalDirection, verticalDirection).normalized;
         rb.velocity = direction * speed;
@@ -65,12 +65,18 @@ public class PlayerController : NetworkBehaviour
 
             if (shouldRotate)
             {
-                transform.localScale = new Vector3(
-                    transform.localScale.x * -1,
-                    transform.localScale.y,
-                    transform.localScale.z
-                );
+                onChangeLocalScaleClientRpc();
             }
         }
+    }
+
+    [ClientRpc]
+    void onChangeLocalScaleClientRpc()
+    {
+        transform.localScale = new Vector3(
+            transform.localScale.x * -1,
+            transform.localScale.y,
+            transform.localScale.z
+        );
     }
 }

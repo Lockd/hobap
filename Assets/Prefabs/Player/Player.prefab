@@ -85,7 +85,8 @@ GameObject:
   - component: {fileID: 340542015106795695}
   - component: {fileID: 340542015106795693}
   - component: {fileID: 340542015106795694}
-  - component: {fileID: 9052591520526986603}
+  - component: {fileID: 5152726961656669562}
+  - component: {fileID: 4436423116380983037}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -148,7 +149,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &9052591520526986603
+--- !u!114 &5152726961656669562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,18 +163,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SyncPositionX: 1
   SyncPositionY: 1
-  SyncPositionZ: 0
+  SyncPositionZ: 1
   SyncRotAngleX: 0
   SyncRotAngleY: 0
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
-  InLocalSpace: 0
+  InLocalSpace: 1
   Interpolate: 1
+--- !u!114 &4436423116380983037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340542015106795664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &340542016272077951
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +427,7 @@ GameObject:
   - component: {fileID: 410502355401425253}
   - component: {fileID: 5047352330272051797}
   - component: {fileID: 4971422885765178158}
+  - component: {fileID: 1011586290736693257}
   m_Layer: 0
   m_Name: Player model
   m_TagString: Untagged
@@ -488,6 +502,7 @@ MonoBehaviour:
   speed: 10
   rotationSpeed: 10
   rb: {fileID: 340542015106795693}
+  isFacingRight: 1
 --- !u!212 &5047352330272051797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -528,7 +543,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -639,6 +654,32 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!114 &1011586290736693257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8716521505203334131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 0
+  SyncPositionY: 0
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
 --- !u!1001 &2293970260527390373
 PrefabInstance:
   m_ObjectHideFlags: 0

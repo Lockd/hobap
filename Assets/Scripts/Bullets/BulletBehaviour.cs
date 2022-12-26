@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
@@ -20,7 +18,7 @@ public class BulletBehaviour : NetworkBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(initialPosition, transform.position) > maxTravelDistance)
+        if (Vector3.Distance(initialPosition, transform.position) > maxTravelDistance && IsOwner)
         {
             destroyBulletServerRpc();
         }

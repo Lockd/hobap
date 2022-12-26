@@ -29,6 +29,6 @@ public class networkManagerUI : MonoBehaviour
     // Remove this to enable ability to connect to server
     private void Start()
     {
-        NetworkManager.Singleton.StartHost();
+        // NetworkManager.Singleton.StartHost();
     }
 }
